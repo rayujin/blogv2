@@ -1,0 +1,135 @@
+
+/* HEADER */
+
+/* arrière plan */
+.header .jumbotron
+{
+	background-image: url("../Images/header_background.jpg");
+}
+
+/* titre */
+#titre
+{
+	text-align: center;
+	color: white;	
+}
+
+
+/* FOOTER */
+
+/* lien vers l'admin */
+.connexion_admin
+{
+	display: flex;
+	justify-content : center;
+}
+
+
+
+/* AFFICHAGE DES COMMENTAIRES DANS SHOW.PHP */
+
+/* Général */
+.commentAutor
+{
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.commentOption
+{
+
+}
+
+
+
+
+/* Commentaires principaux */
+
+.primaryComment
+{
+
+	background-color: #d7dbe2;
+
+	border-style: solid;
+	border-width: 1px;
+
+	margin-top: 20px;
+
+	padding-left: 5px;
+}
+
+.primaryCommentHeader
+{
+	background-color: #edeff2;
+}
+
+
+/* 1er niveau de réponses */
+
+.firstResponse
+{
+	background-color: #d7dbe2;
+
+	border-style: dashed;
+	border-width: 2px;
+
+	margin-left: 60px;
+	margin-top: 20px;
+
+	padding-left: 5px;
+}
+
+.firstResponseHeader
+{
+	background-color: #edeff2;
+}
+
+
+/* 2ème niveau de reponses */
+
+.secondResponse
+{
+	background-color: #d7dbe2;
+
+	border-style: dashed;
+	border-width: 2px;
+
+	margin-left: 120px;
+	margin-top: 20px;
+
+	padding-left: 5px;
+}
+
+.secondResponseHeader
+{
+	background-color: #edeff2;	
+}
+
+/* 3ème niveau de réponses */
+
+.thirdResponse
+{
+	background-color: #d7dbe2;
+
+	border-style: dashed;
+	border-width: 2px;
+
+	margin-left: 180px;
+	margin-top: 20px;
+
+	padding-left: 5px;
+}
+
+.thirdResponseHeader
+{
+	background-color: #edeff2;	
+}
+
+
+
+
+
+
+
+
+
