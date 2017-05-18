@@ -162,26 +162,11 @@
 										<!--Signaler un commentaire -->
 										<span class="commentOption">
 											<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$thirdResponse->id()?>&report=<?=$thirdResponse->signalement()?>">Signaler</a>
-
-											<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$thirdResponse->id()?>">repondre</button>
 										</span>
 									</p>
 							
 
-									<!--Répondre à un commentaire -->
-									<div id="<?=$thirdResponse->id()?>" class="collapse">
-										<form class="form" action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$thirdResponse->id()?>" method="post">
-											<div class="form-group">
-												<label for="pseudo">Pseudo</label>
-												<input type="text" name="pseudo" />
-											</div>
-											<div class="form-group">
-												<label for="commentaire">Commentaire</label>
-												<textarea name="commentaire" rows="1" cols=""></textarea>
-											</div>
-												<input class="btn btn-primary" type="submit" value='repondre'/>
-										</form>
-									</div>
+
 								</div>
 
 
