@@ -1,5 +1,5 @@
 		<p class="container">
-			<a href="http://localhost/blog1/index.php">Retour à la liste des articles</a>
+			<a href="http://localhost/blogv2/index.php">Retour à la liste des articles</a>
 		</p>
 		
 		<div class="container">	

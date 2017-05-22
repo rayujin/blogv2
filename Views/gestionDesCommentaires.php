@@ -32,7 +32,7 @@
 				
 			</td>
 			<td>
-				<form action="http://localhost/blog1/admin.php?page=deleteComment" method="post">
+				<form action="http://localhost/blogv2/admin.php?page=deleteComment" method="post">
 					<input type="hidden" name="id" value="<?= $comment->id()?>"/>
 					<button type="submit" class="btn btn-danger">Supprimer</button>
 				</form>
@@ -72,7 +72,7 @@
 				<?= $comment->datePubli() ?>
 			</td>
 			<td>
-				<form action="http://localhost/blog1/admin.php?page=deleteComment" method="post">
+				<form action="http://localhost/blogv2/admin.php?page=deleteComment" method="post">
 					<input type="hidden" name="id" value="<?= $comment->id()?>"/>
 					<button type="submit" class="btn btn-danger">Supprimer</button>
 				</form>

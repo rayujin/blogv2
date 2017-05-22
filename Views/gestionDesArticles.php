@@ -11,16 +11,16 @@
 		<?php foreach ($listeArticles as $articles) : ?>
 		<tr>
 			<td>
-				<a href="/blog1/index.php?page=show&id=<?=$articles->id()?>">
+				<a href="/blogv2/index.php?page=show&id=<?=$articles->id()?>">
 					 <?= $articles->titre() ?> 
 				</a>
 			</td>
 			<td> <?= $articles->dateAjout() ?> </td>
 			<td>
-				<a href="/blog1/admin.php?page=modifierArticle&id=<?=$articles->id()?>" class="btn btn-primary">modifier</a>
+				<a href="/blogv2/admin.php?page=modifierArticle&id=<?=$articles->id()?>" class="btn btn-primary">modifier</a>
 			</td>
 			<td>
-				<form action="http://localhost/blog1/admin.php?page=deleteArticle" method="post">
+				<form action="http://localhost/blogv2/admin.php?page=deleteArticle" method="post">
 					<input type="hidden" name="id" value="<?= $articles->id()?>"/>
 					<button type="submit">Supprimer</button>
 				</form>
