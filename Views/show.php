@@ -1,7 +1,4 @@
 <div class="container">
-	<p>
-		<a href="http://localhost/blogv2/index.php?page=accueil">Liste des articles</a>
-	</p>
 
 	<!-- Affichage de l'article -->
 	<h2>

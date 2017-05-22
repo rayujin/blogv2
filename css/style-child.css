@@ -18,10 +18,16 @@
 /* FOOTER */
 
 /* lien vers l'admin */
-.connexion_admin
+.footer
 {
 	display: flex;
-	justify-content : center;
+	justify-content : space-around;
+}
+
+.footerAdmin
+{
+	display: flex;
+	justify-content : space-around;
 }
 
 

@@ -1,6 +1,6 @@
 <!-- FOOTER ADMIN -->
-<footer class="footer jumbotron container" style="margin-top: 30px">
-	<div>
+<footer class="jumbotron container" style="margin-top: 30px">
+	<div class="footerAdmin">
 	<!-- Retour à l'accueil du blog -->
 		<a href="/blogv2/index.php" class="btn btn-primary ">Retour à l'accueil du blog</a>
 	<!-- Retour au panel d'administration -->
