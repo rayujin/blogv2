@@ -32,38 +32,52 @@ class ArticlesController extends Controller
 			$objetCommentaire = new CommentsManager($db);
 			$listeComments = $objetCommentaire->getListComments($_GET['id']);
 
+
+
+
+
 			//Autre méthode pour trier les commentaires
-			/*
-			$comments = [];
-			$reponses = [];
-			$commentaireParId = [];
+			
+			$comments = []; //Liste des commentaires principaux
+			$commentaireParId = []; // liste des commentaires triés en fonction de leur id
+
 
 			foreach($listeComments as $comment) 
 			{
+				//Liste des commentaires PRINCIPAUX  avec comme clés leur id
+
 				if ($comment->parent() === NULL)
 				{
-					$comments[] = $comment;
+					$comments[$comment->id()] = $comment;
 
 				}
+
+				//Liste de TOUS les  commentaires triés en fonction de leur id
 				$commentaireParId[$comment->id()] = $comment;
 
 
 			}
 
-
+			
 			foreach($listeComments as $reponse)
 			{
-				$parent = $commentaireParId[$reponse->parent()];
-
+				
 				if($reponse->parent() !== NULL)
 				{
-					$parent->setReponses($reponse);
+					$parent = $commentaireParId[$reponse->parent()];
+					$parent->addReponse($reponse);
 				}
 			}
+
 			var_dump($comments);
+			var_dump($commentaireParId);
+			//var_dump($parent);
+			//var_dump($commentaireParId);
 			die();
 			
-				*/
+				
+
+			/*
 
 			//Trie des commenantaires avec foreach
 			$firstLevelComments = [];
@@ -106,13 +120,13 @@ class ArticlesController extends Controller
 					}
 				}
 
-			}
+			}*/
 
 
 
 
 			//Affichage de l'article et des commentaires
-			$this->render('show', compact('article','listeComments', 'firstLevelComments', 'secondLevelComments', 'thirdLevelComments', 'fourthLevelComments'));	
+			$this->render('show', compact('article','comments','listeComments', 'firstLevelComments', 'secondLevelComments', 'thirdLevelComments', 'fourthLevelComments'));	
 			
 		}
 	}

@@ -21,6 +21,8 @@ class Comment
 	}
 
 	
+
+
 	// SETTERS //
 
 	public function setId($id)
@@ -74,9 +76,15 @@ class Comment
 		$this->signalement = $signalement;
 	}
 
-	public function setReponses($reponses)
+	public function setReponses(array $reponses)
 	{
 		$this->reponses = $reponses;
+	}
+
+
+	public function addReponse(Comment $reponse)
+	{
+		$this->reponses[] = $reponse; 
 	}
 
 
