@@ -6,6 +6,7 @@ class Controller
 	protected $viewPath = 'C:\wamp64\www\blogv2\Views\\' ;
 	// chemin où se trouve la page à afficher
 	protected $redirectionPath = 'http://localhost/blogv2/';
+	// chemin où se trouve la page à afficher
 
 
 
@@ -19,6 +20,7 @@ class Controller
 		}
 		
 		require($this->viewPath . $view . '.php');
+		
 	}
 
 
@@ -27,6 +29,19 @@ class Controller
 	public function redirect($redirection, $id = NULL)
 	{
 		header('Location: ' . $redirectionPath . $redirection . $id);
+	}
+
+	//Méthode permettant d'afficher les messages d'erreurs ou de succès
+	public function message()
+	{
+		if (isset($_GET['message']))
+		{
+			$message = $_GET['message'];
+
+			require ($this->viewPath . $message . '.php');
+		}
+
+
 	}
 
 }

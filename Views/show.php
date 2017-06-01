@@ -15,173 +15,162 @@
 	<!-- Affichage des commentaires -->
 	<h1>Liste des commmentaires :</h1>
 
-	<!-- 1er niveau de commentaire (commentaires principaux) -->
-	<?php foreach ($firstLevelComments as $comment) : ?>
+
+		<!-- Commentaires principaux -->
+		<?php foreach ($comments as $comment) : ?>
+	
 			<div class="primaryComment">
-				<p class="primaryCommentHeader">
-					<span class="commentAutor"><?= $comment->auteur() ?> </span>
+				
+				<div class="primaryCommentHeader" style="margin-top: 10px">
+					<strong class="commentAutor">
+						<?= $comment->auteur() ?>
+					</strong> 
+
 					<em>
 						<?= $comment->datePubli() ?>
 					</em>
-				</p>
-				
-				<p>
+				</div>
+
+				<div>
 					<?= $comment->commentaire() ?>
-
-					<span class="commentOption">						
-						<!-- Signaler un commentaire -->		
-						<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$comment->id()?>&report=<?=$comment->signalement()?>">Signaler</a>
-
-						<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$comment->id()?>">Repondre</button>
-					</span>
-
-
-				</p>
+				
 			
 
+					<!-- Option de commentaire (signaler, repondre) -->
+					<span class="commentOption">
 
-				<!--Répondre à un commentaire -->
-				<div id="<?=$comment->id()?>" class="collapse">
-					
-					<form class="form"  action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$comment->id()?>" method="post">
-						<div class="form-group">
-							<label for="pseudo">Pseudo</label>
-							<input type="text" name="pseudo" />
-						</div>
-						<div class="form-group">
-							<label for="commentaire">Commentaire</label>
-							<textarea name="commentaire" rows="1" cols=""></textarea>
-						</div>
-							<input class="btn btn-primary" type="submit" value='repondre'/>
-					</form>
+						<!-- Bouton pour afficher le formulaire pour répondre à un commentaire -->
+						<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$comment->id()?>">Repondre</button>
+						<!--Signaler un commentaire -->
+						<a class="btn btn-primary" 
+						   href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$comment->id()?>&report=<?=$comment->signalement()?>">Signaler
+						</a>
+
+					</span>
+
 				</div>
+
+					<!--Formulaire pour répondre à un commentaire -->
+					<div id="<?=$comment->id()?>" class="collapse">
+						
+						<form class="form"  action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$comment->id()?>" method="post">
+						<?php require ('C:\wamp64\www\blogv2\Includes\formRepondreCommentaire.php') ?>
 			</div>
 
 
 
-		<!-- 2ème niveau de commentaire (réponses aux commentaires principaux) -->
 
-		<?php foreach($secondLevelComments as $firstResponse) : ?>
-			<?php if ($firstResponse->parent() === $comment->id()) : ?>
+			<!-- Réponses aux commentaires principaux (1er niveaux) -->
+			<?php foreach ($comment->reponses() as $PremierNiveauDeReponse) : ?>
+
 				<div class="firstResponse">
-					<p class="firstResponseHeader">
-						<span class="commentAutor"> <?= $firstResponse->auteur() ?> </span>
+					<div class="firstResponseHeader">
+						<strong>
+							<?= $PremierNiveauDeReponse->auteur()?>
+						</strong>
+						
 						<em>
-							<?= $firstResponse->datePubli() ?>
+							<?= $PremierNiveauDeReponse->datePubli() ?>
 						</em>
-					</p>
 
-					<p>
-						<?= $firstResponse->commentaire() ?>
+					</div>
 
-						<!--Signaler un commentaire -->
+					<div>
+						<?= $PremierNiveauDeReponse->commentaire() ?>
+					
+
+
+						<!--Option de commentaire (signaler, répondre) -->
 						<span class="commentOption">
-							<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$firstResponse->id()?>&report=<?=$firstResponse->signalement()?>">Signaler</a>
+							<!-- Bouton pour afficher le formulaire pour répondre à un commentaire --> 
+							<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$PremierNiveauDeReponse->id()?>">repondre</button>
+
+							<!--Signaler un commentaire -->
+							<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$PremierNiveauDeReponse->id()?>&report=<?=$PremierNiveauDeReponse->signalement()?>">Signaler</a>
 							
-							<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$firstResponse->id()?>">repondre</button>
 						</span>
 
-					</p>
-
-
-					<!--Répondre à un commentaire -->
-					<div id="<?=$firstResponse->id()?>" class="collapse">
-						<form class="form" action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$firstResponse->id()?>" method="post">
-							<div class="form-group">
-								<label for="pseudo">Pseudo</label>
-								<input type="text" name="pseudo" />
-							</div>
-							<div class="form-group">
-								<label for="commentaire">Commentaire</label>
-								<textarea name="commentaire" rows="1" cols=""></textarea>
-							</div>
-								<input class="btn btn-primary" type="submit" value='repondre'/>
-						</form>
 					</div>
+
+					<!--Formulaire pour répondre à un commentaire -->
+					<div id="<?=$PremierNiveauDeReponse->id()?>" class="collapse">
+						<form class="form" action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$PremierNiveauDeReponse->id()?>" method="post">
+						<?php require ('C:\wamp64\www\blogv2\Includes\formRepondreCommentaire.php') ?>
 				</div>
 
 
+				<!-- Réponses aux réponses des commentaires principaux (2ème niveau) -->
+				<?php foreach ($PremierNiveauDeReponse->reponses() as $DeuxiemeNiveauDeReponse) : ?>
+					<div class="secondResponse">
+						<div class="secondResponseHeader">
+							<strong>
+								<?= $DeuxiemeNiveauDeReponse->auteur() ?>
+							</strong>
 
-				<!-- 3ème niveau de commentaire -->
-				<?php foreach($thirdLevelComments as $secondResponse) : ?>
-					<?php if ($secondResponse->parent() === $firstResponse->id()) : ?>
-						<div class="secondResponse">
-							<p class="secondResponseHeader">
-							<span class="commentAutor"><?= $secondResponse->auteur() ?> </span>
-								<em>
-									<?= $secondResponse->datePubli() ?>
-								</em>
-							</p>
+							<em>
+								<?= $DeuxiemeNiveauDeReponse->datePubli() ?>
+							</em>
 
-							<p>
-								<?= $secondResponse->commentaire() ?>
-
-								<!--Signaler un commentaire -->
-								<span class="commentOption">
-									<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$secondResponse->id()?>&report=<?=$secondResponse->signalement()?>">Signaler</a>
-
-									<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$secondResponse->id()?>">repondre</button>
-								</span>
-							</p>
-
-
-							<!--Répondre à un commentaire -->
-							<div id="<?=$secondResponse->id()?>" class="collapse">
-								<form class="form"   action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$secondResponse->id()?>" method="post">
-									<div class="form-group">
-										<label for="pseudo">Pseudo</label>
-										<input type="text" name="pseudo" />
-									</div>
-									<div class="form-group">
-										<label for="commentaire">Commentaire</label>
-										<textarea name="commentaire" rows="1" cols=""></textarea>
-									</div>
-										<input class="btn btn-primary" type="submit" value='repondre'/>
-								</form>
-							</div>
 						</div>
 
+						<div>
+							<?= $DeuxiemeNiveauDeReponse->commentaire() ?>
+						
 
-						<!-- 4ème niveau de commentaire -->
-						<?php foreach($fourthLevelComments as $thirdResponse) : ?>
-							<?php if($thirdResponse->parent() === $secondResponse->id()) : ?>
-								<div class="thirdResponse">
-									<p class="thirdResponseHeader">
-										<span class="commentAutor"><?= $thirdResponse->auteur()?> </span>
-										<em>
-											<?= $thirdResponse->datePubli() ?>
-										</em>
-									</p>
+							<!--Option de commentaire -->
+							<span class="commentOption">
+								<!-- Bouton pour afficher le formulaire pour répondre à un commentaire -->
+								<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$DeuxiemeNiveauDeReponse->id()?>">repondre</button>
 
-									<p >
-										<?= $thirdResponse->commentaire() ?>
+								<!--Signaler un commentaire -->
+								<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$DeuxiemeNiveauDeReponse->id()?>&report=<?=$DeuxiemeNiveauDeReponse->signalement()?>">Signaler</a>
+							</span>
+						</div>
 
-										<!--Signaler un commentaire -->
-										<span class="commentOption">
-											<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$thirdResponse->id()?>&report=<?=$thirdResponse->signalement()?>">Signaler</a>
-										</span>
-									</p>
+						<!--Formulaire pour répondre à un commentaire -->
+						<div id="<?=$DeuxiemeNiveauDeReponse->id()?>" class="collapse">
+							<form class="form" action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$DeuxiemeNiveauDeReponse->id()?>" method="post">
+							<?php require ('C:\wamp64\www\blogv2\Includes\formRepondreCommentaire.php') ?>
+					</div>	
+
+
+				<!-- Troisième niveau de réponse -->
+					<?php foreach ($DeuxiemeNiveauDeReponse->reponses() as $TroisiemeNiveauDeReponse) : ?>
+						<div class="thirdResponse">
+							<div class="thirdResponseHeader">
+								<strong>
+									<?= $TroisiemeNiveauDeReponse->auteur() ?>
+								</strong>
+								
+								<em>
+									<?= $TroisiemeNiveauDeReponse->datePubli() ?>
+								</em>
+
+							</div>
+
+							<div>
+								<?= $TroisiemeNiveauDeReponse->commentaire() ?>
 							
 
+								<!-- Option de commentaire -->
+								<span class="commentOption">
+									<!--Signaler un commentaire -->
+									<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$TroisiemeNiveauDeReponse->id()?>&report=<?=$TroisiemeNiveauDeReponse->signalement()?>">Signaler</a>
 
-								</div>
-
-
-							<?php endif ?>
-						<?php endforeach ?>
-					<?php endif ?>
+								</span>
+							</div>
+						</div>
+					<?php endforeach ?>
 				<?php endforeach ?>
-			<?php endif ?>	
+			<?php endforeach ?>
 		<?php endforeach ?>
-	<?php endforeach ?>
-
 
 
 
 	<!-- Ajouter un commentaire -->
 	<h2>Ajouter un commentaire</h2>
 
-	<form class="form-horizontal" action="http://localhost/blog1/index.php?page=addComment&id=<?=$_GET['id']?>" method="post">
+	<form class="form-horizontal" action="http://localhost/blogv2/index.php?page=addComment&id=<?=$_GET['id']?>" method="post">
 		<div class="form-group">
 			<label class="col-sm-1 control-label" for="pseudo">Pseudo</label>
 			<div class="col-sm-10">
@@ -200,6 +189,9 @@
 			</div>
 		</div>
 	</form>
+
+
+	<!-- Affichage des messages erreurs/succès -->
 
 </div>
 

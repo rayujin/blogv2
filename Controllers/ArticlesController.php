@@ -34,9 +34,7 @@ class ArticlesController extends Controller
 
 
 
-
-
-			//Autre méthode pour trier les commentaires
+			//Trie des commentaires
 			
 			$comments = []; //Liste des commentaires principaux
 			$commentaireParId = []; // liste des commentaires triés en fonction de leur id
@@ -54,11 +52,8 @@ class ArticlesController extends Controller
 
 				//Liste de TOUS les  commentaires triés en fonction de leur id
 				$commentaireParId[$comment->id()] = $comment;
-
-
 			}
 
-			
 			foreach($listeComments as $reponse)
 			{
 				
@@ -69,82 +64,19 @@ class ArticlesController extends Controller
 				}
 			}
 
-			var_dump($comments);
-			var_dump($commentaireParId);
-			//var_dump($parent);
-			//var_dump($commentaireParId);
-			die();
+
+			//Affichage de la vue associé
+			$this->render('show', compact('article','comments'));	
 			
-				
-
-			/*
-
-			//Trie des commenantaires avec foreach
-			$firstLevelComments = [];
-			$secondLevelComments = [];
-			$thirdLevelComments = [];
-			$fourthLevelComments = [];
-			
-			foreach($listeComments as $comment)
-			{
-				//Commentaire principaux (1er niveau)
-				if($comment->parent() === NULL)
-				{
-					$firstLevelComments[] = $comment;	
-				}
-
-				// reponse aux commentaires principaux (2ème niveau)
-				foreach($firstLevelComments as $firstComment)
-				{
-					if($comment->parent() === $firstComment->id())
-					{
-						$secondLevelComments[] = $comment;
-					}
-				}
-
-				// reponse aux reponses des commentaires principaux (3ème niveau)
-				foreach ($secondLevelComments as $secondComment)
-				{
-					if($comment->parent() === $secondComment->id())
-					{
-						$thirdLevelComments[] = $comment;
-					}
-				}
-
-				// (4ème niveau)
-				foreach ($thirdLevelComments as $thirdComment)
-				{
-					if($comment->parent() === $thirdComment->id())
-					{
-						$fourthLevelComments[] = $comment;
-					}
-				}
-
-			}*/
-
-
-
-
-			//Affichage de l'article et des commentaires
-			$this->render('show', compact('article','comments','listeComments', 'firstLevelComments', 'secondLevelComments', 'thirdLevelComments', 'fourthLevelComments'));	
-			
+					
 		}
+
+
+		//Gestion des messages erreurs\succès
+		$this->message();
+
+
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

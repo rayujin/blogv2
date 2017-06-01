@@ -13,7 +13,7 @@ class CommentsController extends Controller
 
 			if (!empty($_POST['pseudo']) && !empty($_POST['commentaire']))
 			{
-				//On récupère les valeurs passées en POST et en l'id passée en GET
+				//On récupère les valeurs passées en POST et l'id passée en GET
 				$pseudo = htmlspecialchars($_POST['pseudo']);
 				$commentaire = htmlspecialchars($_POST['commentaire']);
 				$article = $_GET['id'];
@@ -25,11 +25,19 @@ class CommentsController extends Controller
 				$comment->setArticle($article);
 
 				//On ajoute le commentaire en bdd
-				$objetCommentaire->add($comment);	
+				$objetCommentaire->add($comment);
+
+				//On redirige le visiteur
+				$this->redirect('index.php?page=show&message=successAjouterCommenaire&id=', $_GET['id']);	
 			}
 
-			//On redirige le visiteur
-			$this->redirect('index.php?page=show&id=', $_GET['id']);
+			else
+			{
+				$this->redirect('index.php?page=show&message=errorChampsIncorrect&id=', $_GET['id']);	
+
+			}
+
+
 		}
 	}
 
