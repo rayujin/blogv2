@@ -12,6 +12,9 @@ class AdminArticlesController extends Controller
 
 		// On require la vue 
 		$this->render('gestionDesArticles', compact('listeArticles'));
+
+		//Affichage des messages erreurs/succès
+		$this->message();
 	}
 
 	public function affichageModifierArticle()
@@ -27,6 +30,8 @@ class AdminArticlesController extends Controller
 			//require de la vue
 			$this->render('modifierArticle', compact('article'));
 		}
+
+		$this->message();
 	}
 
 
@@ -42,7 +47,7 @@ class AdminArticlesController extends Controller
 			$objetArticle->deleteArticle($_POST['id']);
 			
 			//On redirige le visiteur
-			$this->redirect('admin.php?page=gestionDesArticles');
+			$this->redirect('admin.php?page=gestionDesArticles&message=successSupprimerArticle');
 
 		}
 
@@ -58,7 +63,7 @@ class AdminArticlesController extends Controller
 		$db = PDOFactory::getMysqlConnexion();
 		$objetArticle = new ArticlesManager($db);
 		
-		if(isset($_POST['titre']) && isset($_POST['contenu']))
+		if(!empty($_POST['titre']) && !empty($_POST['contenu']))
 		{
 		
 			$titre = htmlspecialchars($_POST['titre']);
@@ -71,8 +76,9 @@ class AdminArticlesController extends Controller
 
 			$objetArticle->addArticle($article);
 
-			$this->redirect('admin.php?page=gestionDesArticles');
+			$this->redirect('admin.php?page=gestionDesArticles&message=successAjouterArticle');
 		}
+
 	}
 
 
@@ -83,7 +89,7 @@ class AdminArticlesController extends Controller
 		$db = PDOFactory::getMysqlConnexion();
 		$objetArticle = new ArticlesManager($db);
 
-		if(isset($_POST['titre']) && isset($_POST['contenu']))
+		if(!empty($_POST['titre']) && !empty($_POST['contenu']))
 		{
 			$titre = htmlspecialchars(($_POST['titre']));
 			$contenu = $_POST['contenu'];
@@ -97,7 +103,15 @@ class AdminArticlesController extends Controller
 			$objetArticle->updateArticle($article);
 
 			//On redirige l'admin
-			$this->redirect('admin.php?page=gestionDesArticles');
+			$this->redirect('admin.php?page=gestionDesArticles&message=successModifArticle');
 		}
+		else
+		{
+			$this->redirect('admin.php?page=modifierArticle&id=' . $_GET['id'] . '&message=errorChampsIncorrect');
+		}
+
+
 	}
+
+
 }

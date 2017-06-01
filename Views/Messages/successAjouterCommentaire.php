@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="pull-left bg-success">
+	<div class="bg-success">
 		Commentaire bien ajouté, merci !
 	</div>
 </div>

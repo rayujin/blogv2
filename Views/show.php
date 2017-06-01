@@ -1,7 +1,7 @@
 <div class="container">
-
 	<!-- Affichage de l'article -->
 	<h2>
+
 		<?= $article->titre() ?>
 	</h2>
 
@@ -191,7 +191,8 @@
 	</form>
 
 
-	<!-- Affichage des messages erreurs/succès -->
+
+
 
 </div>
 

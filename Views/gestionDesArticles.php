@@ -22,7 +22,7 @@
 			<td>
 				<form action="http://localhost/blogv2/admin.php?page=deleteArticle" method="post">
 					<input type="hidden" name="id" value="<?= $articles->id()?>"/>
-					<button type="submit">Supprimer</button>
+					<button class="btn btn-danger" type="submit">Supprimer</button>
 				</form>
 			</td>
 		</tr>

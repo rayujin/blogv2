@@ -16,6 +16,9 @@ class AdminCommentsController extends Controller
 
 		//On require la vue
 		$this->render('gestionDesCommentaires', compact('listeComments', 'listeCommentsReported'));
+
+		//Affichage des messages erreurs/succes
+		$this->message();
 	}
 
 
@@ -32,7 +35,7 @@ class AdminCommentsController extends Controller
 		{
 			$objetCommentaire->deleteComment($_POST['id']);
 
-			$this->redirect('admin.php?page=gestionDesCommentaires');
+			$this->redirect('admin.php?page=gestionDesCommentaires&message=successSupprimerCommentaire');
 		}
 		
 

@@ -2,6 +2,8 @@
 
 class UsersController extends Controller
 {
+
+
 	//Méthode permettant de se connecter au panel d'administration
 	public function connexionAdmin()
 	{
@@ -29,16 +31,31 @@ class UsersController extends Controller
 
 					if($objetUser->exist($pseudo, $password))
 					{
-						//die('Connecte');
-						$_SESSION['user'] = $pseudo; 
-						header('Location: admin.php');
+
+						$_SESSION['user'] = $pseudo;
+
+						$this->redirect('admin.php?page=accueilAdmin');
+					
 					}
+					
+					elseif(empty($_POST['pseudo']) || empty($_POST['password']))
+					{
+						 	
+						$this->redirect('index.php?page=connexion&message=errorChampsIncorrect');
+							
+					}
+
 					else
 					{
-						echo 'Identifiant incorrect';
+						$this->redirect('index.php?page=connexion&message=errorIdentifiant');
+
 					}
+
 				}
 			}
 		}
+
+		//Gestion des messages erreurs\succès
+		$this->message();
 	}		
 }

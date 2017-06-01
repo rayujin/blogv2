@@ -28,7 +28,7 @@ class CommentsController extends Controller
 				$objetCommentaire->add($comment);
 
 				//On redirige le visiteur
-				$this->redirect('index.php?page=show&message=successAjouterCommenaire&id=', $_GET['id']);	
+				$this->redirect('index.php?page=show&message=successAjouterCommentaire&id=', $_GET['id']);	
 			}
 
 			else
@@ -68,10 +68,18 @@ class CommentsController extends Controller
 
 					//On ajoute la reponse au commentaire en bdd
 					$objetCommentaire->addResponse($comment);
+
+					// On redirige le visiteur
+					$this->redirect('index.php?page=show&message=successAjouterCommentaire&id=', $_GET['article']);
 				}
 
-			// On redirige le visiteur
-			$this->redirect('index.php?page=show&id=', $_GET['article']);
+			else
+				{
+					$this->redirect('index.php?page=show&message=errorChampsIncorrect&id=', $_GET['article']);	
+
+				}
+
+
 				
 			}
 		}
@@ -96,8 +104,14 @@ class CommentsController extends Controller
 			$objetCommentaire->reportComment($id, $signalement);
 
 			//on redirige le visiteur
-			$this->redirect('index.php?page=show&id=', $_GET['idArticle']);
+			$this->redirect('index.php?page=show&message=successSignalerCommentaire&id=', $_GET['idArticle']);
 		}
+
+		else
+			{
+				$this->redirect('index.php?page=show&message=errorSignalerCommentaire&id=', $_GET['article']);	
+
+			}
 	}
 
 

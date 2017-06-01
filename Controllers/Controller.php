@@ -6,7 +6,8 @@ class Controller
 	protected $viewPath = 'C:\wamp64\www\blogv2\Views\\' ;
 	// chemin où se trouve la page à afficher
 	protected $redirectionPath = 'http://localhost/blogv2/';
-	// chemin où se trouve la page à afficher
+	// chemin où se trouve le message à afficher
+	protected $messagePath = 'C:\wamp64\www\blogv2\Views\Messages\\';
 
 
 
@@ -38,7 +39,7 @@ class Controller
 		{
 			$message = $_GET['message'];
 
-			require ($this->viewPath . $message . '.php');
+			require ($this->messagePath . $message . '.php');
 		}
 
 
