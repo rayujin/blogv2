@@ -31,6 +31,30 @@
 }
 
 
+/* AFFICHAGE DE LA PAGE D'ACCUEIL */
+.img_profil
+{
+	float: left;
+	margin-right: 10px;
+}
+
+.quiSuisJe
+{
+	text-align: justify;
+}
+.accueilArticle
+{
+	clear: left;
+	border-top: solid;
+	border-width: 2px;
+
+}
+
+
+
+
+
+
 
 /* AFFICHAGE DES COMMENTAIRES DANS SHOW.PHP */
 
@@ -44,9 +68,6 @@
 {
 
 }
-
-
-
 
 /* Commentaires principaux */
 
