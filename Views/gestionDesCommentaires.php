@@ -22,13 +22,13 @@
 				<?= $comment->auteur() ?>
 			</td>
 			<td>
-				<?= $comment->commentaire() ?>
+				<?= $comment->contenu() ?>
 			</td>
 			<td>
-				<?= $comment->datePubli() ?>
+				<?= $comment->datePublication() ?>
 			</td>
 			<td>
-				<?= $comment->signalement() ?>
+				<?= $comment->nbrSignalement() ?>
 				
 			</td>
 			<td>
@@ -66,10 +66,10 @@
 				<?= $comment->auteur() ?>
 			</td>
 			<td>
-				<?= $comment->commentaire() ?>
+				<?= $comment->contenu() ?>
 			</td>
 			<td>
-				<?= $comment->datePubli() ?>
+				<?= $comment->datePublication() ?>
 			</td>
 			<td>
 				<form action="http://localhost/blogv2/admin.php?page=deleteComment" method="post">

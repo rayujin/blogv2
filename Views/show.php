@@ -27,12 +27,12 @@
 					</strong> 
 
 					<em>
-						<?= $comment->datePubli() ?>
+						<?= $comment->datePublication() ?>
 					</em>
 				</div>
 
 				<div>
-					<?= $comment->commentaire() ?>
+					<?= $comment->contenu() ?>
 				
 			
 
@@ -43,7 +43,7 @@
 						<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$comment->id()?>">Repondre</button>
 						<!--Signaler un commentaire -->
 						<a class="btn btn-primary" 
-						   href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$comment->id()?>&report=<?=$comment->signalement()?>">Signaler
+						   href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$comment->id()?>&report=<?=$comment->nbrSignalement()?>">Signaler
 						</a>
 
 					</span>
@@ -53,7 +53,7 @@
 					<!--Formulaire pour répondre à un commentaire -->
 					<div id="<?=$comment->id()?>" class="collapse">
 						
-						<form class="form"  action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$comment->id()?>" method="post">
+						<form class="form"  action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&idParent=<?=$comment->id()?>" method="post">
 						<?php require ('C:\wamp64\www\blogv2\Includes\formRepondreCommentaire.php') ?>
 			</div>
 
@@ -70,13 +70,13 @@
 						</strong>
 						
 						<em>
-							<?= $PremierNiveauDeReponse->datePubli() ?>
+							<?= $PremierNiveauDeReponse->datePublication() ?>
 						</em>
 
 					</div>
 
 					<div>
-						<?= $PremierNiveauDeReponse->commentaire() ?>
+						<?= $PremierNiveauDeReponse->contenu() ?>
 					
 
 
@@ -86,7 +86,7 @@
 							<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$PremierNiveauDeReponse->id()?>">repondre</button>
 
 							<!--Signaler un commentaire -->
-							<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$PremierNiveauDeReponse->id()?>&report=<?=$PremierNiveauDeReponse->signalement()?>">Signaler</a>
+							<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$PremierNiveauDeReponse->id()?>&report=<?=$PremierNiveauDeReponse->nbrSignalement()?>">Signaler</a>
 							
 						</span>
 
@@ -94,7 +94,7 @@
 
 					<!--Formulaire pour répondre à un commentaire -->
 					<div id="<?=$PremierNiveauDeReponse->id()?>" class="collapse">
-						<form class="form" action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$PremierNiveauDeReponse->id()?>" method="post">
+						<form class="form" action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&idParent=<?=$PremierNiveauDeReponse->id()?>" method="post">
 						<?php require ('C:\wamp64\www\blogv2\Includes\formRepondreCommentaire.php') ?>
 				</div>
 
@@ -108,13 +108,13 @@
 							</strong>
 
 							<em>
-								<?= $DeuxiemeNiveauDeReponse->datePubli() ?>
+								<?= $DeuxiemeNiveauDeReponse->datePublication() ?>
 							</em>
 
 						</div>
 
 						<div>
-							<?= $DeuxiemeNiveauDeReponse->commentaire() ?>
+							<?= $DeuxiemeNiveauDeReponse->contenu() ?>
 						
 
 							<!--Option de commentaire -->
@@ -123,13 +123,13 @@
 								<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#<?=$DeuxiemeNiveauDeReponse->id()?>">repondre</button>
 
 								<!--Signaler un commentaire -->
-								<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$DeuxiemeNiveauDeReponse->id()?>&report=<?=$DeuxiemeNiveauDeReponse->signalement()?>">Signaler</a>
+								<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$DeuxiemeNiveauDeReponse->id()?>&report=<?=$DeuxiemeNiveauDeReponse->nbrSignalement()?>">Signaler</a>
 							</span>
 						</div>
 
 						<!--Formulaire pour répondre à un commentaire -->
 						<div id="<?=$DeuxiemeNiveauDeReponse->id()?>" class="collapse">
-							<form class="form" action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&parent=<?=$DeuxiemeNiveauDeReponse->id()?>" method="post">
+							<form class="form" action="http://localhost/blogv2/index.php?page=addResponse&article=<?=$article->id()?>&idParent=<?=$DeuxiemeNiveauDeReponse->id()?>" method="post">
 							<?php require ('C:\wamp64\www\blogv2\Includes\formRepondreCommentaire.php') ?>
 					</div>	
 
@@ -143,19 +143,19 @@
 								</strong>
 								
 								<em>
-									<?= $TroisiemeNiveauDeReponse->datePubli() ?>
+									<?= $TroisiemeNiveauDeReponse->datePublication() ?>
 								</em>
 
 							</div>
 
 							<div>
-								<?= $TroisiemeNiveauDeReponse->commentaire() ?>
+								<?= $TroisiemeNiveauDeReponse->contenu() ?>
 							
 
 								<!-- Option de commentaire -->
 								<span class="commentOption">
 									<!--Signaler un commentaire -->
-									<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$TroisiemeNiveauDeReponse->id()?>&report=<?=$TroisiemeNiveauDeReponse->signalement()?>">Signaler</a>
+									<a class="btn btn-primary" href="index.php?page=reportComment&idArticle=<?=$article->id()?>&id=<?=$TroisiemeNiveauDeReponse->id()?>&report=<?=$TroisiemeNiveauDeReponse->nbrSignalement()?>">Signaler</a>
 
 								</span>
 							</div>

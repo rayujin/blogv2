@@ -3,17 +3,14 @@
 class Comment
 {
 	public $id;
-	protected $parent;
-	protected $article;
+	protected $idParent;
+	protected $idArticle;
 	protected $titre;
 	protected $auteur;
-	protected $commentaire;
-	protected $datePubli;
-	protected $signalement;
+	protected $contenu;
+	protected $datePublication;
+	protected $nbrSignalement;
 	protected $reponses = [];
-
-	const AUTEUR_INVALIDE = "Auteur invalide, entrer un nouveau pseudo !";
-	const CONTENU_INVALIDE = "Contenu invalide, veuillez réessayer !";
 
 	public function isValid()
 	{
@@ -30,14 +27,14 @@ class Comment
 		$this->id = (int) $id;
 	}
 
-	public function setParent($parent)
+	public function setIdParent($idParent)
 	{
-		$this->parent = (int) $parent;
+		$this->idParent = (int) $idParent;
 	}
 
-	public function setArticle($article)
+	public function setIdArticle($idArticle)
 	{
-		$this->article = (int) $article;
+		$this->idArticle = (int) $idArticle;
 	}
 
 	public function setTitre($titre)
@@ -48,32 +45,22 @@ class Comment
 
 	public function setAuteur($auteur)
 	{
-		if (!is_string($auteur) || empty($auteur))
-		{
-			return self::AUTEUR_INVALIDE;
-		}
-
 		$this->auteur = $auteur;
 	}
 
-	public function setCommentaire($commentaire)
+	public function setContenu($contenu)
 	{
-		if (!is_string($commentaire) || empty($commentaire))
-		{
-			return self::CONTENU_INVALIDE;
-		}
-
-		$this->commentaire = $commentaire;
+		$this->contenu = $contenu;
 	}
 
-	public function setDatePubli($datePubli)
+	public function setDatePublication($datePublication)
 	{
-		$this->datePubli = $datePubli;
+		$this->datePublication = $datePublication;
 	}
 	
-	public function setSignalement($signalement)
+	public function setNbrSignalement($nbrSignalement)
 	{
-		$this->signalement = $signalement;
+		$this->nbrSignalement = $nbrSignalement;
 	}
 
 	public function setReponses(array $reponses)
@@ -96,14 +83,14 @@ class Comment
 		return $this->id;
 	}
 
-	public function parent()
+	public function idParent()
 	{
-		return $this->parent;
+		return $this->idParent;
 	}
 
-	public function article()
+	public function idArticle()
 	{
-		return $this->article;
+		return $this->idArticle;
 	}
 
 	public function titre()
@@ -116,23 +103,23 @@ class Comment
 		return $this->auteur;
 	}
 
-	public function commentaire()
+	public function contenu()
 	{
-		return $this->commentaire;
+		return $this->contenu;
 	}
 
-	public function datePubli()
+	public function datePublication()
 	{
-		$datePubli = new DateTime($this->datePubli);
+		$datePublication = new DateTime($this->datePublication);
 
-		return $datePubli->format('d-m-Y à H:i:s');
+		return $datePublication->format('d-m-Y à H:i:s');
 
 		
 	}
 	
-	public function signalement()
+	public function nbrSignalement()
 	{
-		return $this->signalement;
+		return $this->nbrSignalement;
 	}
 
 	public function reponses()

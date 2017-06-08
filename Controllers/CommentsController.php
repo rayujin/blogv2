@@ -15,14 +15,14 @@ class CommentsController extends Controller
 			{
 				//On récupère les valeurs passées en POST et l'id passée en GET
 				$pseudo = htmlspecialchars($_POST['pseudo']);
-				$commentaire = htmlspecialchars($_POST['commentaire']);
-				$article = $_GET['id'];
+				$contenu = htmlspecialchars($_POST['commentaire']);
+				$idArticle = $_GET['id'];
 
 				//On créé un new objet $comment avec les valeurs ci dessus
 				$comment = new Comment;
 				$comment->setAuteur($pseudo);
-				$comment->setCommentaire($commentaire);
-				$comment->setArticle($article);
+				$comment->setContenu($contenu);
+				$comment->setIdArticle($idArticle);
 
 				//On ajoute le commentaire en bdd
 				$objetCommentaire->add($comment);
@@ -53,18 +53,18 @@ class CommentsController extends Controller
 				{
 					//On récupère les valeurs passées en POST
 					$pseudo = htmlspecialchars($_POST['pseudo']);
-					$commentaire = htmlspecialchars($_POST['commentaire']);
+					$contenu = htmlspecialchars($_POST['commentaire']);
 
 					//On récupère les valeurs passées en GET
-					$article = $_GET['article'];
-					$parent = $_GET['parent'];
+					$idArticle = $_GET['article'];
+					$idParent = $_GET['idParent'];
 
 					//On créé un nouvel objet $comment avec les valeurs ci-dessus
 					$comment = new Comment;
 					$comment->setAuteur($pseudo);
-					$comment->setCommentaire($commentaire);
-					$comment->setArticle($article);
-					$comment->setParent($parent);
+					$comment->setContenu($contenu);
+					$comment->setIdArticle($idArticle);
+					$comment->setIdParent($idParent);
 
 					//On ajoute la reponse au commentaire en bdd
 					$objetCommentaire->addResponse($comment);
@@ -95,10 +95,10 @@ class CommentsController extends Controller
 			
 			//on récupère l'id du commentaire et son nbr de signelement envoyé en GET
 			$id = $_GET['id'];
-			$signalement = $_GET['report'];
+			$nbrSignalement = $_GET['report'];
 
 			//on ajoute 1 à son signelement;
-			$signalement = $signalement + 1;
+			$nbrSignalement = $nbrSignalement + 1;
 
 			//on met à jour la bdd
 			$objetCommentaire->reportComment($id, $signalement);

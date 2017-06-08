@@ -35,7 +35,7 @@ class AdminCommentsController extends Controller
 		{
 			$objetCommentaire->deleteComment($_POST['id']);
 
-			$this->redirect('admin.php?page=gestionDesCommentaires&message=successSupprimerCommentaire');
+			$this->redirect('admin.php?page=gestionDesCommentaires');
 		}
 		
 

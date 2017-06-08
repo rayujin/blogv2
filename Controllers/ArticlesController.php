@@ -44,7 +44,7 @@ class ArticlesController extends Controller
 			{
 				//Liste des commentaires PRINCIPAUX  avec comme clés leur id
 
-				if ($comment->parent() === NULL)
+				if ($comment->idParent() === NULL)
 				{
 					$comments[$comment->id()] = $comment;
 
@@ -57,9 +57,9 @@ class ArticlesController extends Controller
 			foreach($listeComments as $reponse)
 			{
 				
-				if($reponse->parent() !== NULL)
+				if($reponse->idParent() !== NULL)
 				{
-					$parent = $commentaireParId[$reponse->parent()];
+					$parent = $commentaireParId[$reponse->idParent()];
 					$parent->addReponse($reponse);
 				}
 			}

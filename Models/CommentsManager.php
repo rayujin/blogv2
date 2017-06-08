@@ -9,11 +9,11 @@ class CommentsManager
 	}
 
 	//Methode retournant la liste des commentaires de l'article X
-	public function getListComments($article)
+	public function getListComments($idArticle)
 	{
 		
-		$requete = $this->db->prepare('SELECT * FROM comments WHERE article = :article ORDER BY id ');
-		$requete->bindValue(':article', $article, PDO::PARAM_INT);
+		$requete = $this->db->prepare('SELECT * FROM comments WHERE idArticle = :idArticle ORDER BY id ');
+		$requete->bindValue(':idArticle', $idArticle, PDO::PARAM_INT);
 		$requete->execute();
 		$requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
 
@@ -31,11 +31,11 @@ class CommentsManager
 	public function getListCommentsByArticle()
 	{
 		$requete = $this->db->query(
-			'SELECT comments.id, comments.auteur, comments.commentaire, comments.datePubli, articles.titre 
+			'SELECT comments.id, comments.auteur, comments.contenu, comments.datePublication, articles.titre 
 			FROM comments 
 			INNER JOIN articles 
-			ON comments.article = articles.id 
-			ORDER BY comments.article');
+			ON comments.idArticle = articles.id 
+			ORDER BY comments.idArticle');
 		$requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
 
 		$listeComments = $requete->fetchALL();
@@ -47,12 +47,12 @@ class CommentsManager
 	public function getListCommentsReported()
 	{
 		$requete = $this->db->query(
-			'SELECT comments.id, comments.auteur, comments.commentaire, comments.datePubli, comments.signalement, articles.titre 
+			'SELECT comments.id, comments.auteur, comments.contenu, comments.datePublication, comments.nbrSignalement, articles.titre 
 			FROM comments 
 			INNER JOIN articles 
-			ON comments.article = articles.id 
-			WHERE comments.signalement > 0 
-			ORDER BY comments.signalement 
+			ON comments.idArticle = articles.id 
+			WHERE comments.nbrSignalement > 0 
+			ORDER BY comments.nbrSignalement 
 			DESC');
 		$requete->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'Comment');
 
@@ -67,10 +67,10 @@ class CommentsManager
 	public function add(Comment $comment)
 	{
 		
-		$requete = $this->db->prepare('INSERT INTO comments SET  article = :article, auteur = :pseudo, commentaire = :commentaire, datePubli = NOW(), signalement = 0');
-		$requete->bindValue(':article', $comment->article());
+		$requete = $this->db->prepare('INSERT INTO comments SET  idArticle = :idArticle, auteur = :pseudo, contenu = :contenu, datePublication = NOW(), nbrSignalement = 0');
+		$requete->bindValue(':idArticle', $comment->idArticle());
 		$requete->bindValue(':pseudo', $comment->auteur());
-		$requete->bindValue(':commentaire', $comment->commentaire());
+		$requete->bindValue(':contenu', $comment->contenu());
 
 		$requete->execute();	
 	}
@@ -78,11 +78,11 @@ class CommentsManager
 	//Methode permettant de repondre à un commentaire
 	public function addResponse(Comment $comment)
 	{
-		$requete = $this->db->prepare('INSERT INTO comments SET parent = :parent, article = :article, auteur = :pseudo, commentaire = :commentaire, datePubli = NOW(), signalement = 0');
-		$requete->bindValue(':parent', $comment->parent());
-		$requete->bindValue(':article', $comment->article());
+		$requete = $this->db->prepare('INSERT INTO comments SET idParent = :idParent, idArticle = :idArticle, auteur = :pseudo, contenu = :contenu, datePublication = NOW(), nbrSignalement = 0');
+		$requete->bindValue(':idParent', $comment->idParent());
+		$requete->bindValue(':idArticle', $comment->idArticle());
 		$requete->bindValue(':pseudo', $comment->auteur());
-		$requete->bindValue(':commentaire', $comment->commentaire());
+		$requete->bindValue(':contenu', $comment->contenu());
 
 		$requete->execute();
 	}
@@ -99,9 +99,9 @@ class CommentsManager
 	//Méthode permettant de signaler un commentaire
 	public function reportComment($id, $signalement)
 	{
-		$requete = $this->db->prepare('UPDATE comments SET signalement = :signalement WHERE id = :id');
+		$requete = $this->db->prepare('UPDATE comments SET nbrSignalement = :nbrSignalement WHERE id = :id');
 		$requete->bindValue(':id', $id);
-		$requete->bindValue(':signalement', $signalement);
+		$requete->bindValue(':nbrSignalement', $signalement);
 		$requete->execute();
 	}
 
