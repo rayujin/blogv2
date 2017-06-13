@@ -64,7 +64,7 @@ class ArticlesController extends Controller
 				}
 			}
 
-
+			var_dump($comments);
 			//Affichage de la vue associé
 			$this->render('show', compact('article','comments'));	
 			

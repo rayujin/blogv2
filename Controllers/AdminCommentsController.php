@@ -35,11 +35,41 @@ class AdminCommentsController extends Controller
 		{
 			$objetCommentaire->deleteComment($_POST['id']);
 
+		
+			//Suppression des responses
+			
+			$listeComments = $objetCommentaire->getListCommentsByArticle();
+			
+			$response1;
+			$reponse2;
+			$reponse3;
+			
+			foreach ($listeComments as $reponse1) 
+			{
+				if($reponse1->idParent() === $_POST['id'])
+				{
+					$objetCommentaire->deleteComment($reponse1->id());
+
+					foreach ($listeComments as $reponse2)
+					{
+						if($reponse2->idParent() === $reponse1->id())
+						{
+							$objetCommentaire->deleteComment($reponse2->id());
+						}
+
+						foreach ($listeComments as $reponse3)
+						{
+							if($reponse3->idParent() === $reponse2->id())
+							{
+								$objetCommentaire->deleteComment($reponse3->id());
+							}
+						}
+					}
+				}
+			}
+
 			$this->redirect('admin.php?page=gestionDesCommentaires');
 		}
-		
-
 	}
-
-
 }
+

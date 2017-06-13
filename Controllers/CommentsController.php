@@ -101,7 +101,7 @@ class CommentsController extends Controller
 			$nbrSignalement = $nbrSignalement + 1;
 
 			//on met à jour la bdd
-			$objetCommentaire->reportComment($id, $signalement);
+			$objetCommentaire->reportComment($id, $nbrSignalement);
 
 			//on redirige le visiteur
 			$this->redirect('index.php?page=show&message=successSignalerCommentaire&id=', $_GET['idArticle']);

@@ -31,7 +31,7 @@ class CommentsManager
 	public function getListCommentsByArticle()
 	{
 		$requete = $this->db->query(
-			'SELECT comments.id, comments.auteur, comments.contenu, comments.datePublication, articles.titre 
+			'SELECT comments.id, comments.idParent, comments.auteur, comments.contenu, comments.datePublication, articles.titre 
 			FROM comments 
 			INNER JOIN articles 
 			ON comments.idArticle = articles.id 
