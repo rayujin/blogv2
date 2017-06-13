@@ -64,13 +64,10 @@ class ArticlesController extends Controller
 				}
 			}
 
-			var_dump($comments);
 			//Affichage de la vue associé
 			$this->render('show', compact('article','comments'));	
-			
-					
+								
 		}
-
 
 		//Gestion des messages erreurs\succès
 		$this->message();

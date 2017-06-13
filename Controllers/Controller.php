@@ -32,6 +32,8 @@ class Controller
 		header('Location: ' . $redirectionPath . $redirection . $id);
 	}
 
+
+
 	//Méthode permettant d'afficher les messages d'erreurs ou de succès
 	public function message()
 	{
@@ -41,8 +43,5 @@ class Controller
 
 			require ($this->messagePath . $message . '.php');
 		}
-
-
 	}
-
 }

@@ -5,7 +5,6 @@ session_start();
 require ('C:\wamp64\www\blogv2\Includes\autoload.php');
 
 
-
 if(!isset($_GET['page']))
 {
 	header("Location: http://localhost/blogv2/index.php?page=accueil");
