@@ -68,7 +68,7 @@ class AdminCommentsController extends Controller
 				}
 			}
 
-			$this->redirect('admin.php?page=gestionDesCommentaires');
+			$this->redirect('admin.php?page=gestionDesCommentaires&message=succesSupprimerCommentaire');
 		}
 	}
 }
